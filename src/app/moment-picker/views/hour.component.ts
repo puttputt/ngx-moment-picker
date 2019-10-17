@@ -1,32 +1,33 @@
 import * as moment from 'moment';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
+import { BaseComponent } from './base.component';
 
 @Component({
     selector: 'app-hour-component',
     templateUrl: './picker-template.component.html',
     styleUrls: ['./picker-template.component.scss']
 })
-export class HourComponent implements OnInit {
-    @Input() locale: string;
-    @Input() format: string;
+export class HourComponent extends BaseComponent implements OnInit {
 
-    @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
+    public type: moment.unitOfTime.DurationConstructor = 'hour';
 
-    public perLine = 4;
-    public minutesStep = 5;
-    public rows = [];
-
-    constructor(private globals: GlobalService) { }
+    constructor(public globals: GlobalService) {
+        super(globals);
+    }
 
     ngOnInit(): void {
+        this.render();
+    }
+
+    public render() {
         let i = 0;
         const minute = this.globals.moment.clone().startOf('hour').minute(0);
 
         const minutesFormat = this.globals.minutesFormat ||
-        moment.localeData(this.globals.locale).longDateFormat('LT').replace(/[aA]/, '').trim();
+            moment.localeData(this.globals.locale).longDateFormat('LT').replace(/[aA]/, '').trim();
 
-        for (let m = 0; m < 60; m += this.minutesStep) {
+        for (let m = 0; m < 60; m += this.globals.minutesStep) {
             const index = Math.floor(i / this.perLine);
             const isSelectable = true;
 
@@ -42,16 +43,13 @@ export class HourComponent implements OnInit {
                     label: minute.format(minutesFormat),
                     selectable: isSelectable,
                     class: [
-                        minute.isSame(this.globals.moment, 'minute') ? 'highlighted' : '',
-                        // !isSelectable ? 'disabled' : minute.isSame()
+                        minute.isSame(this.globals.moment, 'minute') ? 'selected' : '',
                     ]
                 }
             );
             i++;
-            minute.add(this.minutesStep, 'minutes');
+            minute.add(this.globals.minutesStep, 'minutes');
         }
-
-        console.log(this.rows);
     }
 
     public select(item): void {

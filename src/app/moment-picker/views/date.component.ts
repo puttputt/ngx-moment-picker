@@ -1,20 +1,27 @@
+import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
+import { BaseComponent } from './base.component';
 
 @Component({
     selector: 'app-date-component',
     templateUrl: './picker-template.component.html',
     styleUrls: ['./picker-template.component.scss']
 })
-export class DateComponent implements OnInit {
-    public perLine: number = 4;
-    public rows = [];
+export class DateComponent extends BaseComponent implements OnInit {
+    public type: moment.unitOfTime.DurationConstructor = 'day';
 
     @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(private globals: GlobalService) { }
+    constructor(public globals: GlobalService) {
+        super(globals);
+    }
 
     ngOnInit(): void {
+        this.render();
+    }
+
+    public render() {
         const hour = this.globals.moment.clone().startOf('day').hour(this.globals.hoursStart);
 
         for (let h = 0; h <= 23; h++) {
@@ -34,21 +41,17 @@ export class DateComponent implements OnInit {
                     label: hour.format(this.globals.hoursFormat),
                     selectable: isSelectable,
                     class: [
-                        hour.isSame(this.globals.moment, 'hour') ? 'highlighted' : '',
-                        // !isSelectable ? 'disabled' : minute.isSame()
+                        hour.isSame(this.globals.moment, 'hour') ? 'selected' : '',
                     ]
                 }
             );
             hour.add(1, 'hours');
         }
-        console.log(this.rows);
     }
 
     public select(item): void {
-        console.log(item);
         this.globals.moment.set('hour', item.hour);
         this.selectEmitter.emit();
-        console.log(this.globals.moment);
     }
 
     public title(): string {

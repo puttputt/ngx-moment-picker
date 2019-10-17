@@ -16,6 +16,7 @@ export class GlobalService {
     public hoursStart: number = 0;
 
     public minutesFormat: string;
+    public minutesStep: number = 5;
     public minutesStart: number = 0;
     public minutesEnd: number = 59;
 

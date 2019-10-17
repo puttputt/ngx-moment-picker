@@ -9,17 +9,16 @@ import { BaseComponent } from './base.component';
 })
 export class DecadeComponent extends BaseComponent implements OnInit {
 
-    constructor(private globals: GlobalService) {
-        super();
+    constructor(public globals: GlobalService) {
+        super(globals);
     }
 
-    ngOnInit(): void {
-        this.unit = this.globals.moment.clone();
+    public ngOnInit(): void {
         this.render();
     }
 
     public render(): void {
-        const year = this.unit.clone();
+        const year = this.globals.moment.clone();
         const firstYear = Math.floor(year.year() / 10) * 10 - 1;
         year.year(firstYear);
         for (let y = 0; y < 12; y++) {
@@ -37,7 +36,7 @@ export class DecadeComponent extends BaseComponent implements OnInit {
                     label: year.format(this.globals.yearsFormat),
                     selectable: isSelectable,
                     class: [
-                        year.isSame(this.globals.moment, 'year') ? 'highlighted' : '',
+                        year.isSame(this.globals.moment, 'year') ? 'selected' : '',
                         // !isSelectable ? 'disabled' : minute.isSame()
                     ]
                 }
@@ -47,12 +46,12 @@ export class DecadeComponent extends BaseComponent implements OnInit {
     }
 
     public leftArrow(): void {
-        this.unit.subtract(10, 'years');
+        this.globals.moment.subtract(10, 'years');
         this.reset();
     }
 
     public rightArrow(): void {
-        this.unit.add(10, 'years');
+        this.globals.moment.add(10, 'years');
         this.reset();
     }
 
@@ -62,7 +61,7 @@ export class DecadeComponent extends BaseComponent implements OnInit {
     }
 
     public title(): string {
-        const year = this.unit.clone();
+        const year = this.globals.moment.clone();
         return [year.format('YYYY'), year.subtract(9, 'years').format('YYYY')].reverse().join(' - ');
     }
 }

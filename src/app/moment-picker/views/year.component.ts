@@ -1,22 +1,27 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
+import { BaseComponent } from './base.component';
 
 @Component({
     selector: 'app-year-component',
     templateUrl: './picker-template.component.html',
     styleUrls: ['./picker-template.component.scss']
 })
-export class YearComponent implements OnInit {
-    public perLine: number = 4;
-    public rows = [];
+export class YearComponent extends BaseComponent implements OnInit {
+    public type: moment.unitOfTime.DurationConstructor = 'year';
 
-    @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
-
-    constructor(private globals: GlobalService) { }
+    constructor(public globals: GlobalService) {
+        super(globals);
+    }
 
     ngOnInit(): void {
-        const month = this.globals.moment.clone().startOf('year');
+        this.render();
+    }
+
+    public render() {
+        const month = this.globals.moment.clone().startOf('year').clone();
+
         const months = moment.monthsShort();
         const isSelectable = true;
 
@@ -34,17 +39,13 @@ export class YearComponent implements OnInit {
                     label: month.format(this.globals.monthsFormat),
                     selectable: isSelectable,
                     class: [
-                        month.isSame(this.globals.moment, 'month') ? 'highlighted' : '',
-                        // !isSelectable ? 'disabled' : minute.isSame()
+                        month.isSame(this.localMoment, 'month') ? 'selected' : '',
                     ]
                 }
             );
             month.add(1, 'months');
 
         });
-
-
-
     }
 
     public select(item): void {

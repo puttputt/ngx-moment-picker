@@ -1,21 +1,28 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
+import { BaseComponent } from './base.component';
 
 @Component({
     selector: 'app-month-component',
     templateUrl: './picker-template.component.html',
     styleUrls: ['./picker-template.component.scss']
 })
-export class MonthComponent implements OnInit {
+export class MonthComponent extends BaseComponent implements OnInit {
     public perLine: number = moment.weekdays().length;
-    public rows = [];
+    public type: moment.unitOfTime.DurationConstructor = 'month';
 
     @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(private globals: GlobalService) { }
+    constructor(public globals: GlobalService) {
+        super(globals);
+    }
 
     ngOnInit(): void {
+        this.render();
+    }
+
+    public render() {
         const month = this.globals.moment.month();
         const isSelectable = true;
 
@@ -36,7 +43,7 @@ export class MonthComponent implements OnInit {
                     label: day.format(this.globals.daysFormat),
                     selectable: isSelectable,
                     class: [
-                        day.isSame(this.globals.moment, 'hour') ? 'highlighted' : '',
+                        day.isSame(this.globals.moment, 'day') ? 'selected' : '',
                         !isSelectable || day.month() !== month ? 'disabled' : ''
                     ]
                 };
@@ -46,6 +53,7 @@ export class MonthComponent implements OnInit {
             });
         }
     }
+
 
     public select(item: any): void {
         this.globals.moment.set('date', item.date);

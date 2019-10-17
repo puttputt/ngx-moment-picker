@@ -1,27 +1,28 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { GlobalService } from '../services/global';
 
 @Component({
 })
-export class BaseComponent implements OnInit {
+export class BaseComponent {
 
     public perLine: number = 4;
-    public type: string = 'decade';
-    public unit: moment.Moment;
+    public type: moment.unitOfTime.DurationConstructor;
     public rows = [];
+    public localMoment: moment.Moment;
 
     @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor() { }
-
-    ngOnInit(): void { }
+    constructor(public globals: GlobalService) { }
 
     public leftArrow(): void {
-        this.unit.subtract(1, 'decade');
+        this.globals.moment.subtract(1, this.type);
+        this.reset();
     }
 
     public rightArrow(): void {
-        this.unit.add(1, this.type);
+        this.globals.moment.add(1, this.type);
+        this.reset();
     }
 
     public reset(): void {

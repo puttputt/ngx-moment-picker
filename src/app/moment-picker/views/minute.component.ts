@@ -1,20 +1,27 @@
+import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
+import { BaseComponent } from './base.component';
 
 @Component({
     selector: 'app-minute-component',
     templateUrl: './picker-template.component.html',
     styleUrls: ['./picker-template.component.scss']
 })
-export class MinuteComponent implements OnInit {
+export class MinuteComponent extends BaseComponent implements OnInit {
     public perLine: number = 6;
-    public rows = [];
 
-    @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
+    public type: moment.unitOfTime.DurationConstructor = 'minute';
 
-    constructor(private globals: GlobalService) { }
+    constructor(public globals: GlobalService) {
+        super(globals);
+    }
 
     ngOnInit(): void {
+        this.render();
+    }
+
+    public render(): void {
         let i = 0;
         const second = this.globals.moment.clone().startOf('minute').second(this.globals.secondsStart);
 
@@ -35,20 +42,17 @@ export class MinuteComponent implements OnInit {
                     label: second.format(this.globals.secondsFormat),
                     selectable: isSelectable,
                     class: [
-                        second.isSame(this.globals.moment, 'hour') ? 'highlighted' : '',
-                        // !isSelectable ? 'disabled' : minute.isSame()
+                        second.isSame(this.globals.moment, 'second') ? 'selected' : '',
                     ]
                 }
             );
             i++;
             second.add(this.globals.secondsStep, 'seconds');
         }
-
     }
 
     public select(item): void {
         this.globals.moment.set('seconds', item.second);
-        console.log(this.globals.moment);
         this.selectEmitter.emit();
     }
 
