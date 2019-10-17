@@ -12,6 +12,7 @@ export class BaseComponent {
     public localMoment: moment.Moment;
 
     @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
+    @Output() titleEmitter: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(public globals: GlobalService) { }
 
@@ -36,5 +37,10 @@ export class BaseComponent {
 
     public title(): string {
         return '';
+    }
+
+    public titleSelected(): void {
+        console.log('a');
+        this.titleEmitter.emit();
     }
 }
