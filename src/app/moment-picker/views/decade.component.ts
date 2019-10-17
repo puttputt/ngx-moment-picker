@@ -1,23 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { GlobalService } from '../services/global';
+import { BaseComponent } from './base.component';
 
 @Component({
     selector: 'app-decade-component',
     templateUrl: './picker-template.component.html',
     styleUrls: ['./picker-template.component.scss']
 })
-export class DecadeComponent implements OnInit {
-    public perLine: number = 4;
-    public rows = [];
+export class DecadeComponent extends BaseComponent implements OnInit {
 
-    constructor(private globals: GlobalService) { }
+    constructor(private globals: GlobalService) {
+        super();
+    }
 
     ngOnInit(): void {
-        const year = this.globals.moment.clone();
+        this.unit = this.globals.moment.clone();
+        this.render();
+    }
+
+    public render(): void {
+        const year = this.unit.clone();
         const firstYear = Math.floor(year.year() / 10) * 10 - 1;
-
         year.year(firstYear);
-
         for (let y = 0; y < 12; y++) {
             const index = Math.floor(y / this.perLine);
             const isSelectable = true;
@@ -39,17 +43,26 @@ export class DecadeComponent implements OnInit {
                 }
             );
             year.add(1, 'year');
-
         }
     }
 
+    public leftArrow(): void {
+        this.unit.subtract(10, 'years');
+        this.reset();
+    }
+
+    public rightArrow(): void {
+        this.unit.add(10, 'years');
+        this.reset();
+    }
+
     public select(item): void {
-        this.globals.moment.set('hour', item.hour);
-        console.log(this.globals.moment);
+        this.globals.moment.set('year', item.year);
+        this.selectEmitter.emit();
     }
 
     public title(): string {
-        const year = this.globals.moment.clone();
+        const year = this.unit.clone();
         return [year.format('YYYY'), year.subtract(9, 'years').format('YYYY')].reverse().join(' - ');
     }
 }

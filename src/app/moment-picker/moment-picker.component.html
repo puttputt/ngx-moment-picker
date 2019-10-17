@@ -1,6 +1,6 @@
-<!-- <app-day-component></app-day-component>
-<app-hour-component></app-hour-component> -->
-<!-- <app-month-component></app-month-component> -->
-<!-- <app-year-component></app-year-component> -->
-<!-- <app-decade-component></app-decade-component> -->
-<app-minute-component></app-minute-component>
+<app-decade-component *ngIf="currentView === viewStates.Decade" (selectEmitter)="decadeSelected()"></app-decade-component>
+<app-year-component *ngIf="currentView === viewStates.Year" (selectEmitter)="yearSelected()"></app-year-component>
+<app-month-component *ngIf="currentView === viewStates.Month" (selectEmitter)="monthSelected()"></app-month-component>
+<app-date-component *ngIf="currentView === viewStates.Date" (selectEmitter)="dateSelected()"></app-date-component>
+<app-hour-component *ngIf="currentView === viewStates.Hour" (selectEmitter)="hourSelected()"></app-hour-component>
+<app-minute-component *ngIf="currentView === viewStates.Minute" (selectEmitter)="minuteSelected()"></app-minute-component>

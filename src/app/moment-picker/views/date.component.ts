@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
 
 @Component({
-    selector: 'app-day-component',
+    selector: 'app-date-component',
     templateUrl: './picker-template.component.html',
     styleUrls: ['./picker-template.component.scss']
 })
-export class DayComponent implements OnInit {
+export class DateComponent implements OnInit {
     public perLine: number = 4;
     public rows = [];
+
+    @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
+
     constructor(private globals: GlobalService) { }
 
     ngOnInit(): void {
@@ -42,7 +45,9 @@ export class DayComponent implements OnInit {
     }
 
     public select(item): void {
+        console.log(item);
         this.globals.moment.set('hour', item.hour);
+        this.selectEmitter.emit();
         console.log(this.globals.moment);
     }
 

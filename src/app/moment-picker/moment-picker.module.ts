@@ -4,7 +4,7 @@ import { MomentPickerComponent } from './moment-picker.component';
 import { FormsModule } from '@angular/forms';
 import { HourComponent } from './views/hour.component';
 import { GlobalService } from './services/global';
-import { DayComponent } from './views/day.component';
+import { DateComponent } from './views/date.component';
 import { MonthComponent } from './views/month.component';
 import { YearComponent } from './views/year.component';
 import { DecadeComponent } from './views/decade.component';
@@ -14,7 +14,7 @@ import { MinuteComponent } from './views/minute.component';
     declarations: [
         MomentPickerComponent,
         HourComponent,
-        DayComponent,
+        DateComponent,
         MonthComponent,
         YearComponent,
         DecadeComponent,
@@ -27,7 +27,7 @@ import { MinuteComponent } from './views/minute.component';
     exports: [
         MomentPickerComponent,
         HourComponent,
-        DayComponent,
+        DateComponent,
         MonthComponent,
         YearComponent,
         DecadeComponent,

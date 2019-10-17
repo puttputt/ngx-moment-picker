@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
 
 @Component({
@@ -10,6 +10,8 @@ import { GlobalService } from '../services/global';
 export class MonthComponent implements OnInit {
     public perLine: number = moment.weekdays().length;
     public rows = [];
+
+    @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(private globals: GlobalService) { }
 
@@ -46,8 +48,8 @@ export class MonthComponent implements OnInit {
     }
 
     public select(item: any): void {
-        this.globals.moment.set('day', item.day);
-
+        this.globals.moment.set('date', item.date);
+        this.selectEmitter.emit();
     }
 
     public title(): string {

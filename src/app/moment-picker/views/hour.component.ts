@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
 
 @Component({
@@ -11,6 +11,8 @@ export class HourComponent implements OnInit {
     @Input() locale: string;
     @Input() format: string;
 
+    @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
+
     public perLine = 4;
     public minutesStep = 5;
     public rows = [];
@@ -18,18 +20,13 @@ export class HourComponent implements OnInit {
     constructor(private globals: GlobalService) { }
 
     ngOnInit(): void {
-        console.log('HOUR COMPONENT');
-        console.log(this.globals.moment.minute());
-
-
         let i = 0;
-        const minute = moment().clone().startOf('hour').minute(0);
+        const minute = this.globals.moment.clone().startOf('hour').minute(0);
+
         const minutesFormat = this.globals.minutesFormat ||
         moment.localeData(this.globals.locale).longDateFormat('LT').replace(/[aA]/, '').trim();
 
         for (let m = 0; m < 60; m += this.minutesStep) {
-            // console.log(minute);
-            // console.log(minute.isSame(this.globals.moment, 'minute'));
             const index = Math.floor(i / this.perLine);
             const isSelectable = true;
 
@@ -59,7 +56,7 @@ export class HourComponent implements OnInit {
 
     public select(item): void {
         this.globals.moment.set('minute', item.minute);
-        console.log(this.globals.moment);
+        this.selectEmitter.emit();
     }
 
     public title(): string {

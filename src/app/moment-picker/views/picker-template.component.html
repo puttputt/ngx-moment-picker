@@ -3,9 +3,9 @@
         <table class="header-view">
             <thead>
                 <tr>
-                    <th class="view.previous.selectable"></th>
+                    <th class="view.previous.selectable" (click)="leftArrow()">&larr;</th>
                     <th>{{ title() }}</th>
-                    <th class="view.next.selectable"></th>
+                    <th class="view.next.selectable" (click)="rightArrow()">&rarr;</th>
                 </tr>
             </thead>
         </table>

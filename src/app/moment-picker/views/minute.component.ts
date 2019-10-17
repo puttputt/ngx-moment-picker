@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../services/global';
 
 @Component({
@@ -9,6 +9,8 @@ import { GlobalService } from '../services/global';
 export class MinuteComponent implements OnInit {
     public perLine: number = 6;
     public rows = [];
+
+    @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(private globals: GlobalService) { }
 
@@ -47,6 +49,7 @@ export class MinuteComponent implements OnInit {
     public select(item): void {
         this.globals.moment.set('seconds', item.second);
         console.log(this.globals.moment);
+        this.selectEmitter.emit();
     }
 
     public title(): string {
