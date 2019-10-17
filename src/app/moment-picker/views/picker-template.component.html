@@ -1,0 +1,34 @@
+<div class="moment-picker">
+    <div class="moment-picker-container">
+        <table class="header-view">
+            <thead>
+                <tr>
+                    <th class="view.previous.selectable"></th>
+                    <th>{{ title() }}</th>
+                    <th class="view.next.selectable"></th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="moment-picker-specific-views">
+            <table>
+                <!-- ng-if="views[view.selected].headers"-->
+                <!-- <thead>
+                    <tr>
+                        ng-repeat="header in views[view.selected].headers" ng-bind="header"
+                        <th>fdsa</th>
+                    </tr>
+                </thead> -->
+                <tbody>
+
+                    <tr *ngFor="let row of rows">
+                        <td *ngFor="let item of row" [ngClass]="item.class" (click)="item.selectable && select(item)">
+                            {{ item.label }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- ng-if="additions.bottom"  -->
+        <div class="moment-picker-addition bottom"></div>
+    </div>
+</div>
