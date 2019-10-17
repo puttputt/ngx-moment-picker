@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BasicExampleComponent } from './examples/basic/basic.component';
-import { MomentPickerModule } from './moment-picker/moment-picker.module';
+import { Angular2MomentPickerModule } from './angular2-moment-picker/moment-picker.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { MomentPickerModule } from './moment-picker/moment-picker.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MomentPickerModule,
+    Angular2MomentPickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

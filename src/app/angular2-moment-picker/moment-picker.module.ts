@@ -37,4 +37,4 @@ import { MinuteComponent } from './views/minute.component';
         GlobalService
     ],
 })
-export class MomentPickerModule {}
+export class Angular2MomentPickerModule {}
