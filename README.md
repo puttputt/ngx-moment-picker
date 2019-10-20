@@ -8,9 +8,11 @@ npm install angular2-moment-picker
 
 ## Usage
 
-`<lib-angular2-moment-picker
+```html
+<lib-angular2-moment-picker
         [minview]="'year'" [maxview]="'date'" [startview]="'month'" (changed)="changed($event)"
-></lib-angular2-moment-picker>`
+></lib-angular2-moment-picker>
+```
 
 ## Development
 
