@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalService {
-    public moment: moment.Moment = moment();
+    public moment: moment.Moment = moment().set('minute', 0).set('seconds', 0);
 
     public locale: string;
     public format: string;

@@ -40,7 +40,6 @@ export class BaseComponent {
     }
 
     public titleSelected(): void {
-        console.log('a');
         this.titleEmitter.emit();
     }
 }

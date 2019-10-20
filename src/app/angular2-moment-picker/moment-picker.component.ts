@@ -18,9 +18,10 @@ export class MomentPickerComponent implements OnInit {
 
     @Input() public locale: string = 'en-us';
     @Input() public format: string = 'LLL';
-    @Input() public minView: string;
-    @Input() public maxView: string;
-    @Input() public maxDate: string;
+    @Input() public minview: string;
+    @Input() public maxview: string;
+    @Input() public maxdate: string;
+    @Input() public startview: string;
 
     @Input() public inline: boolean;
 
@@ -30,6 +31,7 @@ export class MomentPickerComponent implements OnInit {
 
     public viewStates = ViewState;
     public currentView: ViewState = ViewState.Decade;
+    public viewStack: ViewState[];
 
     public open: boolean = false;
 
@@ -46,88 +48,98 @@ export class MomentPickerComponent implements OnInit {
         if (this.moment) {
             this.globals.moment = this.moment;
         }
+
+        this.viewStack = this.buildViewStack();
     }
 
-    public closePopover(): void {
+    public show(): void {
+        if (this.startview) {
+            this.setCurrentView(this.viewStateFromString(this.startview));
+        } else if (this.minview) {
+            this.setCurrentView(this.viewStateFromString(this.minview));
+        }
 
+        this.open = !this.open;
     }
 
-    public decadeSelected(): void {
-        this.toYear();
-    }
+    public next(): void {
+        const currentViewIndex = this.viewStack.indexOf(this.currentView);
 
-    public yearSelected(): void {
-        this.toMonth();
-    }
-
-    public monthSelected(): void {
-        this.toDate();
-    }
-
-    public dateSelected(): void {
-        this.toHour();
-    }
-
-    public hourSelected(): void {
-        this.toMinute();
-    }
-
-    public minuteSelected(): void {
-        this.open = false;
-    }
-
-    public titleSelected(): void {
-        switch (this.currentView) {
-            case ViewState.Decade:
-                return;
-            case ViewState.Year:
-                this.toDecade();
-                return;
-            case ViewState.Month:
-                this.toYear();
-                return;
-            case ViewState.Date:
-                this.toMonth();
-                return;
-            case ViewState.Hour:
-                this.toDate();
-                return;
-            case ViewState.Minute:
-                this.toHour();
-                return;
-            default:
-                return;
+        if (currentViewIndex === this.viewStack.length) {
+            this.hide();
+        } else {
+            this.currentView = this.viewStack[currentViewIndex + 1];
         }
     }
 
-    private toDecade(): void {
-        this.currentView = ViewState.Decade;
-        this.viewChanged();
+    public previous(): void {
+        const currentViewIndex = this.viewStack.indexOf(this.currentView);
+
+        if (currentViewIndex === 0) {
+            return;
+        } else {
+            this.currentView = this.viewStack[currentViewIndex - 1];
+        }
     }
 
-    private toYear(): void {
-        this.currentView = ViewState.Year;
-        this.viewChanged();
+
+    private buildViewStack(): ViewState[] {
+        const stack: ViewState[] = [];
+
+        const min = this.minview ? this.viewStateFromString(this.minview) : ViewState.Decade;
+        const max = this.maxview ? this.viewStateFromString(this.maxview) : ViewState.Minute;
+
+        for (let i = min; i <= max; i++) {
+            stack.push(i);
+        }
+
+        return stack;
     }
 
-    private toMonth(): void {
-        this.currentView = ViewState.Month;
-        this.viewChanged();
+    private hide(): void {
+        this.open = false;
     }
 
-    private toDate(): void {
-        this.currentView = ViewState.Date;
-        this.viewChanged();
+    private setCurrentView(view: ViewState): void {
+        this.currentView = view;
     }
 
-    private toHour(): void {
-        this.currentView = ViewState.Hour;
-        this.viewChanged();
+    private viewStateFromString(view: string): ViewState {
+        switch (view) {
+            case 'decade':
+                return ViewState.Decade;
+            case 'year':
+                return ViewState.Year;
+            case 'month':
+                return ViewState.Month;
+            case 'date':
+                return ViewState.Date;
+            case 'hour':
+                return ViewState.Hour;
+            case 'minute':
+                return ViewState.Minute;
+            default:
+                return ViewState.Decade;
+        }
     }
 
-    private toMinute(): void {
-        this.currentView = ViewState.Minute;
-        this.viewChanged();
+    private stringFromViewState(view: ViewState): string {
+        switch (view) {
+            case ViewState.Decade:
+                return 'decade';
+            case ViewState.Year:
+                return 'year';
+            case ViewState.Month:
+                return 'month';
+            case ViewState.Date:
+                return 'date';
+            case ViewState.Hour:
+                return 'hour';
+            case ViewState.Minute:
+                return 'minute';
+            default:
+                return 'decade';
+        }
     }
 
     private viewChanged(): void {

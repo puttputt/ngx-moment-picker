@@ -1,16 +1,16 @@
-<div (click)="open =! open">{{ globals.moment.format('YYYY-MM-DD HH:mm') }}</div>
+<div (click)="show()">{{ globals.moment.format('YYYY-MM-DD HH:mm') }}</div>
 
 <div *ngIf="open">
-    <app-decade-component *ngIf="currentView === viewStates.Decade" (selectEmitter)="decadeSelected()"
-        (titleEmitter)="titleSelected()"></app-decade-component>
-    <app-year-component *ngIf="currentView === viewStates.Year" (selectEmitter)="yearSelected()"
-        (titleEmitter)="titleSelected()"></app-year-component>
-    <app-month-component *ngIf="currentView === viewStates.Month" (selectEmitter)="monthSelected()"
-        (titleEmitter)="titleSelected()"></app-month-component>
-    <app-date-component *ngIf="currentView === viewStates.Date" (selectEmitter)="dateSelected()"
-        (titleEmitter)="titleSelected()"></app-date-component>
-    <app-hour-component *ngIf="currentView === viewStates.Hour" (selectEmitter)="hourSelected()"
-        (titleEmitter)="titleSelected()"></app-hour-component>
-    <app-minute-component *ngIf="currentView === viewStates.Minute" (selectEmitter)="minuteSelected()"
-        (titleEmitter)="titleSelected()"></app-minute-component>
+    <app-decade-component *ngIf="currentView === viewStates.Decade" (selectEmitter)="next()"
+        (titleEmitter)="previous()"></app-decade-component>
+    <app-year-component *ngIf="currentView === viewStates.Year" (selectEmitter)="next()"
+        (titleEmitter)="previous()"></app-year-component>
+    <app-month-component *ngIf="currentView === viewStates.Month" (selectEmitter)="next()"
+        (titleEmitter)="previous()"></app-month-component>
+    <app-date-component *ngIf="currentView === viewStates.Date" (selectEmitter)="next()"
+        (titleEmitter)="previous()"></app-date-component>
+    <app-hour-component *ngIf="currentView === viewStates.Hour" (selectEmitter)="next()"
+        (titleEmitter)="previous()"></app-hour-component>
+    <app-minute-component *ngIf="currentView === viewStates.Minute" (selectEmitter)="next()"
+        (titleEmitter)="previous()"></app-minute-component>
 </div>

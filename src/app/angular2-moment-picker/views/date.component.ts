@@ -50,7 +50,7 @@ export class DateComponent extends BaseComponent implements OnInit {
     }
 
     public select(item): void {
-        this.globals.moment.set('hour', item.hour);
+        this.globals.moment.set('hour', item.hour).startOf('minute');
         this.selectEmitter.emit();
     }
 
