@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { GlobalService } from '../services/global';
+import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
 import { BaseComponent } from './base.component';
 
 @Component({
@@ -12,7 +12,7 @@ export class HourComponent extends BaseComponent implements OnInit {
 
     public type: moment.unitOfTime.DurationConstructor = 'hour';
 
-    constructor(public globals: GlobalService) {
+    constructor(public globals: Angular2MomentPickerService) {
         super(globals);
     }
 

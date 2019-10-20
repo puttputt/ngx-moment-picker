@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { GlobalService } from '../services/global';
+import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
 import { BaseComponent } from './base.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class DateComponent extends BaseComponent implements OnInit {
 
     @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(public globals: GlobalService) {
+    constructor(public globals: Angular2MomentPickerService) {
         super(globals);
     }
 

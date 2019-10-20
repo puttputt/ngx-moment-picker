@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { GlobalService } from '../services/global';
+import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
 
 @Component({
 })
@@ -14,7 +14,7 @@ export class BaseComponent {
     @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
     @Output() titleEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(public globals: GlobalService) { }
+    constructor(public globals: Angular2MomentPickerService) { }
 
     public leftArrow(): void {
         this.globals.moment.subtract(1, this.type);

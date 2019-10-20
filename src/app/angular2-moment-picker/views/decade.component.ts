@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { GlobalService } from '../services/global';
+import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
 import { BaseComponent } from './base.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { BaseComponent } from './base.component';
 })
 export class DecadeComponent extends BaseComponent implements OnInit {
 
-    constructor(public globals: GlobalService) {
+    constructor(public globals: Angular2MomentPickerService) {
         super(globals);
     }
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import * as moment from 'moment';
-import { GlobalService } from './services/global';
+import { Angular2MomentPickerService } from './angular2-moment-picker.service';
 
 export enum ViewState {
     Decade = 0,
@@ -12,9 +12,9 @@ export enum ViewState {
 }
 @Component({
     selector: 'app-angular2-moment-picker',
-    templateUrl: './moment-picker.component.html'
+    templateUrl: './angular2-moment-picker.component.html'
 })
-export class MomentPickerComponent implements OnInit {
+export class Angular2MomentPickerComponent implements OnInit {
 
     @Input() public locale: string = 'en-us';
     @Input() public format: string = 'LLL';
@@ -35,7 +35,7 @@ export class MomentPickerComponent implements OnInit {
 
     public open: boolean = false;
 
-    constructor(private globals: GlobalService) { }
+    constructor(private globals: Angular2MomentPickerService) { }
 
     ngOnInit(): void {
         if (!moment) {
