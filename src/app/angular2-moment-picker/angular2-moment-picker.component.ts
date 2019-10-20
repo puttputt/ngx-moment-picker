@@ -35,7 +35,7 @@ export class Angular2MomentPickerComponent implements OnInit {
 
     public open: boolean = false;
 
-    constructor(private globals: Angular2MomentPickerService) { }
+    constructor(public globals: Angular2MomentPickerService) { }
 
     ngOnInit(): void {
         if (!moment) {

@@ -9,10 +9,12 @@ import { MonthComponent } from './views/month.component';
 import { YearComponent } from './views/year.component';
 import { DecadeComponent } from './views/decade.component';
 import { MinuteComponent } from './views/minute.component';
+import { BaseComponent } from './views/base.component';
 
 @NgModule({
     declarations: [
         Angular2MomentPickerComponent,
+        BaseComponent,
         HourComponent,
         DateComponent,
         MonthComponent,

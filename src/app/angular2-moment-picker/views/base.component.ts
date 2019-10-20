@@ -3,6 +3,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
 
 @Component({
+    templateUrl: './picker-template.component.html',
 })
 export class BaseComponent {
 
