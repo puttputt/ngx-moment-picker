@@ -13,6 +13,5 @@ export class BasicExampleComponent implements OnInit {
     ngOnInit(): void { }
 
     public changed(event: moment.Moment) {
-        console.log(event);
     }
 }

@@ -1,16 +1,22 @@
-<div (click)="show()">{{ globals.moment.format('YYYY-MM-DD HH:mm') }}</div>
+
+<div class="input-group" (click)="show()">
+    <input [(ngModel)]="moment" class="form-control" placeholder="Select a date">
+    <div class="input-group-append">
+        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+    </div>
+</div>
 
 <div *ngIf="open">
     <lib-decade-component *ngIf="currentView === viewStates.Decade" (selectEmitter)="next()"
         (titleEmitter)="previous()"></lib-decade-component>
-    <lib-year-component *ngIf="currentView === viewStates.Year" (selectEmitter)="next()"
-        (titleEmitter)="previous()"></lib-year-component>
-    <lib-month-component *ngIf="currentView === viewStates.Month" (selectEmitter)="next()"
-        (titleEmitter)="previous()"></lib-month-component>
-    <lib-date-component *ngIf="currentView === viewStates.Date" (selectEmitter)="next()"
-        (titleEmitter)="previous()"></lib-date-component>
-    <lib-hour-component *ngIf="currentView === viewStates.Hour" (selectEmitter)="next()"
-        (titleEmitter)="previous()"></lib-hour-component>
+    <lib-year-component *ngIf="currentView === viewStates.Year" (selectEmitter)="next()" (titleEmitter)="previous()">
+    </lib-year-component>
+    <lib-month-component *ngIf="currentView === viewStates.Month" (selectEmitter)="next()" (titleEmitter)="previous()">
+    </lib-month-component>
+    <lib-date-component *ngIf="currentView === viewStates.Date" (selectEmitter)="next()" (titleEmitter)="previous()">
+    </lib-date-component>
+    <lib-hour-component *ngIf="currentView === viewStates.Hour" (selectEmitter)="next()" (titleEmitter)="previous()">
+    </lib-hour-component>
     <lib-minute-component *ngIf="currentView === viewStates.Minute" (selectEmitter)="next()"
         (titleEmitter)="previous()"></lib-minute-component>
 </div>

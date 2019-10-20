@@ -71,7 +71,7 @@ export class Angular2MomentPickerComponent implements OnInit {
         if (currentViewIndex === this.viewStack.length) {
             this.hide();
         } else {
-            this.currentView = this.viewStack[currentViewIndex + 1];
+            this.setCurrentView(this.viewStack[currentViewIndex + 1]);
         }
     }
 
@@ -81,7 +81,7 @@ export class Angular2MomentPickerComponent implements OnInit {
         if (currentViewIndex === 0) {
             return;
         } else {
-            this.currentView = this.viewStack[currentViewIndex - 1];
+            this.setCurrentView(this.viewStack[currentViewIndex - 1]);
         }
     }
 
@@ -105,6 +105,7 @@ export class Angular2MomentPickerComponent implements OnInit {
 
     private setCurrentView(view: ViewState): void {
         this.currentView = view;
+        this.viewChanged();
     }
 
     private viewStateFromString(view: string): ViewState {
@@ -146,7 +147,7 @@ export class Angular2MomentPickerComponent implements OnInit {
     }
 
     private viewChanged(): void {
-        this.moment = this.globals.moment;
+        this.moment = this.globals.moment.clone();
         this.changed.emit(this.moment);
     }
 }

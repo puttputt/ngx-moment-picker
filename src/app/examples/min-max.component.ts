@@ -16,6 +16,5 @@ export class MinMaxExampleComponent implements OnInit {
     }
 
     public changed(event: moment.Moment) {
-        console.log(event);
     }
 }
