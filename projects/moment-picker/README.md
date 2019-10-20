@@ -1,24 +1,24 @@
-# MomentPicker
+# Angular2 Moment Picker
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+This project is a port of angular-moment-picker for AngularJS
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name --project moment-picker` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project moment-picker`.
-> Note: Don't forget to add `--project moment-picker` or else it will be added to the default project in your `angular.json` file. 
+npm install angular2-moment-picker
 
-## Build
+## Usage
 
-Run `ng build moment-picker` to build the project. The build artifacts will be stored in the `dist/` directory.
+`<lib-angular2-moment-picker
+        [minview]="'year'" [maxview]="'date'" [startview]="'month'" (changed)="changed($event)"
+></lib-angular2-moment-picker>`
 
-## Publishing
+## Development
 
-After building your library with `ng build moment-picker`, go to the dist folder `cd dist/moment-picker` and run `npm publish`.
+### Build
 
-## Running unit tests
+Run `ng build moment-picker` to build the project.
 
-Run `ng test moment-picker` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Publishing to NPM
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+`cd dist/moment-picker`
+`npm publish`
