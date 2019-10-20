@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
 import { Angular2MomentPickerService } from './angular2-moment-picker.service';
 
 export enum ViewState {
@@ -10,8 +10,11 @@ export enum ViewState {
     Hour,
     Minute
 }
+
+const moment = moment_;
+
 @Component({
-    selector: 'app-angular2-moment-picker',
+    selector: 'lib-angular2-moment-picker',
     templateUrl: './angular2-moment-picker.component.html'
 })
 export class Angular2MomentPickerComponent implements OnInit {
@@ -25,9 +28,9 @@ export class Angular2MomentPickerComponent implements OnInit {
 
     @Input() public inline: boolean;
 
-    @Input() public moment: moment.Moment;
+    @Input() public moment: moment_.Moment;
 
-    @Output() public changed: EventEmitter<moment.Moment> = new EventEmitter<moment.Moment>();
+    @Output() public changed: EventEmitter<moment_.Moment> = new EventEmitter<moment_.Moment>();
 
     public viewStates = ViewState;
     public currentView: ViewState = ViewState.Decade;
@@ -38,7 +41,7 @@ export class Angular2MomentPickerComponent implements OnInit {
     constructor(public globals: Angular2MomentPickerService) { }
 
     ngOnInit(): void {
-        if (!moment) {
+        if (!this.moment) {
             this.moment = moment();
         }
 

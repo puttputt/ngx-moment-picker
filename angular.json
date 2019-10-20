@@ -119,6 +119,41 @@
           }
         }
       }
+    },
+    "moment-picker": {
+      "projectType": "library",
+      "root": "projects/moment-picker",
+      "sourceRoot": "projects/moment-picker/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/moment-picker/tsconfig.lib.json",
+            "project": "projects/moment-picker/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/moment-picker/src/test.ts",
+            "tsConfig": "projects/moment-picker/tsconfig.spec.json",
+            "karmaConfig": "projects/moment-picker/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/moment-picker/tsconfig.lib.json",
+              "projects/moment-picker/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "angular2-moment-picker"
 }

@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "moment-picker": [
+        "dist/moment-picker"
+      ],
+      "moment-picker/*": [
+        "dist/moment-picker/*"
+      ]
+    }
   }
 }

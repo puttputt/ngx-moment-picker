@@ -1,9 +1,11 @@
-import * as moment from 'moment';
+import * as moment_ from 'moment';
 import { Injectable } from '@angular/core';
+
+const moment = moment_;
 
 @Injectable()
 export class Angular2MomentPickerService {
-    public moment: moment.Moment = moment().set('minute', 0).set('seconds', 0);
+    public moment: moment_.Moment = moment().set('minute', 0).set('seconds', 0);
 
     public locale: string;
     public format: string;

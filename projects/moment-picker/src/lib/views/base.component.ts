@@ -43,4 +43,8 @@ export class BaseComponent {
     public titleSelected(): void {
         this.titleEmitter.emit();
     }
+
+    public select(item): void {
+        return;
+    }
 }

@@ -3,7 +3,7 @@ import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
 import { BaseComponent } from './base.component';
 
 @Component({
-    selector: 'app-decade-component',
+    selector: 'lib-decade-component',
     templateUrl: './picker-template.component.html',
     styleUrls: ['./picker-template.component.scss']
 })

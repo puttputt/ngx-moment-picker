@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     template: `
-        <app-angular2-moment-picker (changed)="changed($event)"></app-angular2-moment-picker>
+        <lib-angular2-moment-picker (changed)="changed($event)"></lib-angular2-moment-picker>
     `
 })
 export class BasicExampleComponent implements OnInit {
