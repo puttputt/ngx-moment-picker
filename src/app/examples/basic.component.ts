@@ -15,7 +15,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 <angular2-moment-picker [moment]="momentBasic" (changed)="changed($event)" #angular2momentpicker></angular2-moment-picker>
     `
 })
-export class BasicExampleComponent implements OnInit {
+export class BasicExampleComponent {
 
     public momentBasic: moment.Moment;
 
@@ -23,15 +23,11 @@ export class BasicExampleComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit(): void { }
-
     public click() {
         this.picker.show();
-
     }
+
     public changed(event: moment.Moment) {
         this.momentBasic = event;
     }
-
-
 }
