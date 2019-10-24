@@ -2,13 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BasicExampleComponent } from './examples/basic.component';
 import { MinMaxExampleComponent } from './examples/min-max.component';
+import { ExampleComponent } from './examples/example.component';
 
 const routes: Routes = [
   {
-    path: 'basic', component: BasicExampleComponent
-  },
-  {
-    path: 'minmax', component: MinMaxExampleComponent
+    path: '', component: ExampleComponent
   }
 ];
 

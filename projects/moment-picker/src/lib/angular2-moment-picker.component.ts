@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, HostListener, ElementRef } from '@angular/core';
 import * as moment_ from 'moment';
 import { Angular2MomentPickerService } from './angular2-moment-picker.service';
 
@@ -14,20 +14,20 @@ export enum ViewState {
 const moment = moment_;
 
 @Component({
-    selector: 'lib-angular2-moment-picker',
-    templateUrl: './angular2-moment-picker.component.html'
+    // tslint:disable-next-line: component-selector
+    selector: 'angular2-moment-picker',
+    templateUrl: './angular2-moment-picker.component.html',
+    providers: [Angular2MomentPickerService]
 })
 export class Angular2MomentPickerComponent implements OnInit {
 
-    @Input() public locale: string = 'en-us';
-    @Input() public format: string = 'LLL';
+    @Input() public locale?: string = 'en-us';
+    @Input() public format?: string = 'LLL';
     @Input() public minview: string;
     @Input() public maxview: string;
-    @Input() public maxdate: string;
-    @Input() public startview: string;
-
-    @Input() public inline: boolean;
-
+    @Input() public maxdate?: string;
+    @Input() public startview?: string;
+    @Input() public onlyupdateatend: boolean = false;
     @Input() public moment: moment_.Moment;
 
     @Output() public changed: EventEmitter<moment_.Moment> = new EventEmitter<moment_.Moment>();
@@ -38,7 +38,12 @@ export class Angular2MomentPickerComponent implements OnInit {
 
     public open: boolean = false;
 
-    constructor(public globals: Angular2MomentPickerService) { }
+    private isFocusInsideComponent: boolean = false;
+    private isComponentClicked: boolean = false;
+
+    constructor(
+        public globals: Angular2MomentPickerService
+    ) { }
 
     ngOnInit(): void {
         if (!this.moment) {
@@ -51,15 +56,32 @@ export class Angular2MomentPickerComponent implements OnInit {
         if (this.moment) {
             this.globals.moment = this.moment;
         }
-
         this.viewStack = this.buildViewStack();
     }
 
+    @HostListener('click') click() {
+        this.isFocusInsideComponent = true;
+        this.isComponentClicked = true;
+    }
+
+    @HostListener('document:click', ['$event']) onOutsideClick(event) {
+        if (!this.isFocusInsideComponent && this.isComponentClicked) {
+            this.hide();
+            this.isComponentClicked = false;
+        }
+        this.isFocusInsideComponent = false;
+    }
+
     public show(): void {
+        this.isFocusInsideComponent = true;
+        this.isComponentClicked = true;
+
         if (this.startview) {
             this.setCurrentView(this.viewStateFromString(this.startview));
         } else if (this.minview) {
             this.setCurrentView(this.viewStateFromString(this.minview));
+        } else {
+            this.setCurrentView(ViewState.Decade);
         }
 
         this.open = !this.open;
@@ -127,27 +149,13 @@ export class Angular2MomentPickerComponent implements OnInit {
         }
     }
 
-    private stringFromViewState(view: ViewState): string {
-        switch (view) {
-            case ViewState.Decade:
-                return 'decade';
-            case ViewState.Year:
-                return 'year';
-            case ViewState.Month:
-                return 'month';
-            case ViewState.Date:
-                return 'date';
-            case ViewState.Hour:
-                return 'hour';
-            case ViewState.Minute:
-                return 'minute';
-            default:
-                return 'decade';
-        }
-    }
-
     private viewChanged(): void {
         this.moment = this.globals.moment.clone();
-        this.changed.emit(this.moment);
+
+        if (!this.onlyupdateatend) {
+            this.changed.emit(this.moment);
+        } else if (this.onlyupdateatend && !this.currentView) {
+            this.changed.emit(this.moment);
+        }
     }
 }

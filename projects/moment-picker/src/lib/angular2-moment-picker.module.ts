@@ -27,10 +27,9 @@ import { BaseComponent } from './views/base.component';
         FormsModule
     ],
     exports: [
-        Angular2MomentPickerComponent
+        Angular2MomentPickerComponent,
     ],
     providers: [
-        Angular2MomentPickerService
     ],
 })
 export class Angular2MomentPickerModule {}
