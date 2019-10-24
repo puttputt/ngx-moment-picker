@@ -4,7 +4,9 @@ This project is a port of angular-moment-picker for AngularJS
 
 ## Installation
 
+```
 npm install angular2-moment-picker
+```
 
 ## Usage
 
@@ -18,9 +20,6 @@ npm install angular2-moment-picker
         [startview]="'month'"
         [onlyupdateatend]="'true'"
         (changed)="changed($event)" #angular2momentpicker></angular2-moment-picker>
-<lib-angular2-moment-picker
-        [minview]="'year'" [maxview]="'date'" [startview]="'month'" (changed)="changed($event)"
-></lib-angular2-moment-picker>
 ```
 
 ```typescript
@@ -37,7 +36,7 @@ export class ExampleComponent {
     }
 
     public changed(event: moment.Moment) {
-        this.momentBasic = event;
+        this.moment = event;
     }
 }
 ```
