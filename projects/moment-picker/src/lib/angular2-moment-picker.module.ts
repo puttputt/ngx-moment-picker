@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Angular2MomentPickerComponent } from './angular2-moment-picker.component';
 import { FormsModule } from '@angular/forms';
 import { HourComponent } from './views/hour.component';
-import { Angular2MomentPickerService } from './angular2-moment-picker.service';
 import { DateComponent } from './views/date.component';
 import { MonthComponent } from './views/month.component';
 import { YearComponent } from './views/year.component';
