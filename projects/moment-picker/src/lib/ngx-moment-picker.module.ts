@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Angular2MomentPickerComponent } from './angular2-moment-picker.component';
+import { NgxMomentPickerComponent } from './ngx-moment-picker.component';
 import { FormsModule } from '@angular/forms';
 import { HourComponent } from './views/hour.component';
 import { DateComponent } from './views/date.component';
@@ -12,7 +12,7 @@ import { BaseComponent } from './views/base.component';
 
 @NgModule({
     declarations: [
-        Angular2MomentPickerComponent,
+        NgxMomentPickerComponent,
         BaseComponent,
         HourComponent,
         DateComponent,
@@ -22,7 +22,7 @@ import { BaseComponent } from './views/base.component';
         MinuteComponent
     ],
     imports: [CommonModule, FormsModule],
-    exports: [Angular2MomentPickerComponent],
+    exports: [NgxMomentPickerComponent],
     providers: []
 })
-export class Angular2MomentPickerModule {}
+export class NgxMomentPickerModule {}

@@ -15,8 +15,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
             </div>
         </div>
-        <angular2-moment-picker [moment]="moment" (changed)="changed($event)" #format>
-        </angular2-moment-picker>
+        <ngx-moment-picker [moment]="moment" (changed)="changed($event)" #format>
+        </ngx-moment-picker>
     `
 })
 export class FormatExampleComponent implements OnInit {

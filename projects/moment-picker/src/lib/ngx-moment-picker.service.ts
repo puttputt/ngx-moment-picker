@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 const moment = moment_;
 
 @Injectable()
-export class Angular2MomentPickerService {
+export class NgxMomentPickerService {
     public moment: moment_.Moment = moment()
         .set('minute', 0)
         .set('seconds', 0);

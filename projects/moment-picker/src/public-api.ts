@@ -1,2 +1,2 @@
-export { Angular2MomentPickerModule } from './lib/angular2-moment-picker.module';
-export { Angular2MomentPickerComponent } from './lib/angular2-moment-picker.component';
+export { NgxMomentPickerModule } from './lib/ngx-moment-picker.module';
+export { NgxMomentPickerComponent } from './lib/ngx-moment-picker.component';

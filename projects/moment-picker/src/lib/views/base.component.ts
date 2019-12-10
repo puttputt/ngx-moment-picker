@@ -1,12 +1,11 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
+import { NgxMomentPickerService } from '../ngx-moment-picker.service';
 
 @Component({
-    templateUrl: './picker-template.component.html',
+    templateUrl: './picker-template.component.html'
 })
 export class BaseComponent {
-
     public perLine: number = 4;
     public type: moment.unitOfTime.DurationConstructor;
     public rows = [];
@@ -15,7 +14,7 @@ export class BaseComponent {
     @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
     @Output() titleEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(public globals: Angular2MomentPickerService) { }
+    constructor(public globals: NgxMomentPickerService) {}
 
     public leftArrow(): void {
         this.globals.moment.subtract(1, this.type);

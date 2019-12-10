@@ -5,7 +5,7 @@ This project is a port of angular-moment-picker for AngularJS
 ## Installation
 
 ```
-npm install angular2-moment-picker
+npm install ngx-moment-picker
 ```
 
 ## Usage
@@ -13,13 +13,13 @@ npm install angular2-moment-picker
 ```html
 <input [value]="moment?.toString()" (click)="picker.toggle()">
 
-<angular2-moment-picker 
+<ngx-moment-picker 
         [moment]="moment"
         [minview]="'year'"
         [maxview]="'date'"
         [startview]="'month'"
         [onlyupdateatend]="'true'"
-        (changed)="changed($event)" #angular2momentpicker></angular2-moment-picker>
+        (changed)="changed($event)" #ngxmomentpicker></ngx-moment-picker>
 ```
 
 ```typescript
@@ -27,7 +27,8 @@ export class ExampleComponent {
 
     public moment: moment.Moment;
 
-    @ViewChild('angular2momentpicker', { static: false }) picker;
+    //optional
+    @ViewChild('ngxmomentpicker', { static: false }) picker;
 
     constructor() { }
 
@@ -40,10 +41,9 @@ export class ExampleComponent {
 ## Development
 
 ### Build
-
+`increment package.json version`
 Run `ng build moment-picker` to build the project.
 
 ## Publishing to NPM
-
 `cd dist/moment-picker`
 `npm publish`

@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
+import { NgxMomentPickerService } from '../ngx-moment-picker.service';
 import { BaseComponent } from './base.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { BaseComponent } from './base.component';
 export class YearComponent extends BaseComponent implements OnInit {
     public type: moment.unitOfTime.DurationConstructor = 'year';
 
-    constructor(public globals: Angular2MomentPickerService) {
+    constructor(public globals: NgxMomentPickerService) {
         super(globals);
     }
 
@@ -20,31 +20,31 @@ export class YearComponent extends BaseComponent implements OnInit {
     }
 
     public render() {
-        const month = this.globals.moment.clone().startOf('year').clone();
+        const month = this.globals.moment
+            .clone()
+            .startOf('year')
+            .clone();
 
         const months = moment.monthsShort();
         const isSelectable = true;
 
         months.forEach((label, i) => {
             const index = Math.floor(i / this.perLine);
-            if (!this.rows[index]) { this.rows[index] = []; }
+            if (!this.rows[index]) {
+                this.rows[index] = [];
+            }
 
-            this.rows[index].push(
-                {
-                    year: month.year(),
-                    month: month.month(),
-                    date: month.date(),
-                    hour: month.hour(),
-                    minute: month.minute(),
-                    label: month.format(this.globals.monthsFormat),
-                    selectable: isSelectable,
-                    class: [
-                        month.isSame(this.localMoment, 'month') ? 'selected' : '',
-                    ]
-                }
-            );
+            this.rows[index].push({
+                year: month.year(),
+                month: month.month(),
+                date: month.date(),
+                hour: month.hour(),
+                minute: month.minute(),
+                label: month.format(this.globals.monthsFormat),
+                selectable: isSelectable,
+                class: [month.isSame(this.localMoment, 'month') ? 'selected' : '']
+            });
             month.add(1, 'months');
-
         });
     }
 

@@ -1,6 +1,13 @@
-import { Component, EventEmitter, OnInit, Input, Output, HostListener } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    OnInit,
+    Input,
+    Output,
+    HostListener
+} from '@angular/core';
 import * as moment_ from 'moment';
-import { Angular2MomentPickerService } from './angular2-moment-picker.service';
+import { NgxMomentPickerService } from './ngx-moment-picker.service';
 
 export enum ViewState {
     Decade = 0,
@@ -15,11 +22,11 @@ const moment = moment_;
 
 @Component({
     // tslint:disable-next-line: component-selector
-    selector: 'angular2-moment-picker',
-    templateUrl: './angular2-moment-picker.component.html',
-    providers: [Angular2MomentPickerService]
+    selector: 'ngx-moment-picker',
+    templateUrl: './ngx-moment-picker.component.html',
+    providers: [NgxMomentPickerService]
 })
-export class Angular2MomentPickerComponent implements OnInit {
+export class NgxMomentPickerComponent implements OnInit {
     @Input() public locale?: string = 'en-us';
     @Input() public minview: string;
     @Input() public maxview: string;
@@ -28,7 +35,9 @@ export class Angular2MomentPickerComponent implements OnInit {
     @Input() public onlyupdateatend: boolean = false;
     @Input() public moment: moment_.Moment;
 
-    @Output() public changed: EventEmitter<moment_.Moment> = new EventEmitter<moment_.Moment>();
+    @Output() public changed: EventEmitter<moment_.Moment> = new EventEmitter<
+        moment_.Moment
+    >();
 
     public viewStates = ViewState;
     public currentView: ViewState = ViewState.Decade;
@@ -39,7 +48,7 @@ export class Angular2MomentPickerComponent implements OnInit {
     private isFocusInsideComponent: boolean = false;
     private isComponentClicked: boolean = false;
 
-    constructor(public globals: Angular2MomentPickerService) {}
+    constructor(public globals: NgxMomentPickerService) {}
 
     ngOnInit(): void {
         if (!this.moment) {
@@ -105,8 +114,12 @@ export class Angular2MomentPickerComponent implements OnInit {
     private buildViewStack(): ViewState[] {
         const stack: ViewState[] = [];
 
-        const min = this.minview ? this.viewStateFromString(this.minview) : ViewState.Decade;
-        const max = this.maxview ? this.viewStateFromString(this.maxview) : ViewState.Minute;
+        const min = this.minview
+            ? this.viewStateFromString(this.minview)
+            : ViewState.Decade;
+        const max = this.maxview
+            ? this.viewStateFromString(this.maxview)
+            : ViewState.Minute;
 
         for (let i = min; i <= max; i++) {
             stack.push(i);

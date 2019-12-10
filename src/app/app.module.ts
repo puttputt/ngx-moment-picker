@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BasicExampleComponent } from './examples/basic.component';
-import { Angular2MomentPickerModule } from '../../projects/moment-picker/src/lib/angular2-moment-picker.module';
+import { NgxMomentPickerModule } from '../../projects/moment-picker/src/lib/ngx-moment-picker.module';
 import { MinMaxExampleComponent } from './examples/min-max.component';
 import { ExampleComponent } from './examples/example.component';
 import { StartViewAndUpdateAtEndExampleComponent } from './examples/start-view-update-at-end.component';
@@ -19,7 +19,7 @@ import { NgxGistModule } from 'ngx-gist/dist/ngx-gist.module';
         StartViewAndUpdateAtEndExampleComponent,
         FormatExampleComponent
     ],
-    imports: [BrowserModule, AppRoutingModule, Angular2MomentPickerModule, NgxGistModule],
+    imports: [BrowserModule, AppRoutingModule, NgxMomentPickerModule, NgxGistModule],
     providers: [],
     bootstrap: [AppComponent]
 })

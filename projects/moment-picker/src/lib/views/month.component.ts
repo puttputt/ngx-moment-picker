@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
+import { NgxMomentPickerService } from '../ngx-moment-picker.service';
 import { BaseComponent } from './base.component';
 
 @Component({
@@ -14,7 +14,7 @@ export class MonthComponent extends BaseComponent implements OnInit {
 
     @Output() selectEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(public globals: Angular2MomentPickerService) {
+    constructor(public globals: NgxMomentPickerService) {
         super(globals);
     }
 
@@ -26,14 +26,16 @@ export class MonthComponent extends BaseComponent implements OnInit {
         const month = this.globals.moment.month();
         const isSelectable = true;
 
-        const day = this.globals.moment.clone().startOf('month').startOf('week').hour(12);
+        const day = this.globals.moment
+            .clone()
+            .startOf('month')
+            .startOf('week')
+            .hour(12);
         const firstWeek = day.week();
         const lastWeek = firstWeek + 5;
 
         for (let week = firstWeek; week <= lastWeek; week++) {
-
             this.rows[week] = Array.apply(null, Array(this.perLine)).map(() => {
-
                 const date = {
                     year: day.year(),
                     month: day.month(),
@@ -53,7 +55,6 @@ export class MonthComponent extends BaseComponent implements OnInit {
             });
         }
     }
-
 
     public select(item: any): void {
         this.globals.moment.set('date', item.date);

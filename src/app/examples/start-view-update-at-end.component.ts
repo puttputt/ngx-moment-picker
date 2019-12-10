@@ -15,14 +15,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
             </div>
         </div>
-        <angular2-moment-picker
+        <ngx-moment-picker
             [startview]="'decade'"
             [onlyupdateatend]="'true'"
             [moment]="moment"
             (changed)="changed($event)"
             #minMax
         >
-        </angular2-moment-picker>
+        </ngx-moment-picker>
     `
 })
 export class StartViewAndUpdateAtEndExampleComponent implements OnInit {

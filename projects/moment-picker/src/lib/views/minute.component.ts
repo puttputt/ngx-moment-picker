@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Angular2MomentPickerService } from '../angular2-moment-picker.service';
+import { NgxMomentPickerService } from '../ngx-moment-picker.service';
 import { BaseComponent } from './base.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class MinuteComponent extends BaseComponent implements OnInit {
 
     public type: moment.unitOfTime.DurationConstructor = 'minute';
 
-    constructor(public globals: Angular2MomentPickerService) {
+    constructor(public globals: NgxMomentPickerService) {
         super(globals);
     }
 
@@ -23,29 +23,34 @@ export class MinuteComponent extends BaseComponent implements OnInit {
 
     public render(): void {
         let i = 0;
-        const second = this.globals.moment.clone().startOf('minute').second(this.globals.secondsStart);
+        const second = this.globals.moment
+            .clone()
+            .startOf('minute')
+            .second(this.globals.secondsStart);
 
-        for (let s = 0; s <= this.globals.secondsEnd - this.globals.secondsStart; s += this.globals.secondsStep) {
+        for (
+            let s = 0;
+            s <= this.globals.secondsEnd - this.globals.secondsStart;
+            s += this.globals.secondsStep
+        ) {
             const index = Math.floor(i / this.perLine);
             const isSelectable = true;
 
-            if (!this.rows[index]) { this.rows[index] = []; }
+            if (!this.rows[index]) {
+                this.rows[index] = [];
+            }
 
-            this.rows[index].push(
-                {
-                    year: second.year(),
-                    month: second.month(),
-                    date: second.date(),
-                    hour: second.hour(),
-                    minute: second.minute(),
-                    second: second.second(),
-                    label: second.format(this.globals.secondsFormat),
-                    selectable: isSelectable,
-                    class: [
-                        second.isSame(this.globals.moment, 'second') ? 'selected' : '',
-                    ]
-                }
-            );
+            this.rows[index].push({
+                year: second.year(),
+                month: second.month(),
+                date: second.date(),
+                hour: second.hour(),
+                minute: second.minute(),
+                second: second.second(),
+                label: second.format(this.globals.secondsFormat),
+                selectable: isSelectable,
+                class: [second.isSame(this.globals.moment, 'second') ? 'selected' : '']
+            });
             i++;
             second.add(this.globals.secondsStep, 'seconds');
         }
@@ -57,6 +62,9 @@ export class MinuteComponent extends BaseComponent implements OnInit {
     }
 
     public title(): string {
-        return this.globals.moment.clone().startOf('minute').format('lll');
+        return this.globals.moment
+            .clone()
+            .startOf('minute')
+            .format('lll');
     }
 }
