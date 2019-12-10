@@ -8,6 +8,19 @@ This project is a port of popular angularJS picker, angular-moment-picker.
 npm install ngx-moment-picker
 ```
 
+```
+import { NgxMomentPickerModule } from 'ngx-moment-picker';
+
+@NgModule({
+    imports: [
+        NgxMomentPickerModule,
+    ],
+    declarations: [],
+    providers: [],
+})
+export class YourModule {}
+```
+
 ## Usage
 
 ```html
@@ -27,7 +40,6 @@ export class ExampleComponent {
 
     public moment: moment.Moment;
 
-    //optional
     @ViewChild('ngxmomentpicker', { static: false }) picker;
 
     constructor() { }
