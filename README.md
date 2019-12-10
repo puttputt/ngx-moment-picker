@@ -1,6 +1,6 @@
-# Angular2 Moment Picker
+# Ngx Moment Picker
 
-This project is a port of angular-moment-picker for AngularJS
+This project is a port of popular angularJS picker, angular-moment-picker.
 
 ## Installation
 
@@ -41,9 +41,12 @@ export class ExampleComponent {
 ## Development
 
 ### Build
-`increment package.json version`
+increment package.json version
+
 Run `ng build moment-picker` to build the project.
 
 ## Publishing to NPM
+
 `cd dist/moment-picker`
+
 `npm publish`
