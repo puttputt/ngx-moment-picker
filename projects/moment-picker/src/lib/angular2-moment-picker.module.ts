@@ -19,16 +19,10 @@ import { BaseComponent } from './views/base.component';
         MonthComponent,
         YearComponent,
         DecadeComponent,
-        MinuteComponent,
+        MinuteComponent
     ],
-    imports: [
-        CommonModule,
-        FormsModule
-    ],
-    exports: [
-        Angular2MomentPickerComponent,
-    ],
-    providers: [
-    ],
+    imports: [CommonModule, FormsModule],
+    exports: [Angular2MomentPickerComponent],
+    providers: []
 })
 export class Angular2MomentPickerModule {}

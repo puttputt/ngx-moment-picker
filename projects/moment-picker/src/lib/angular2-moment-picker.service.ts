@@ -5,7 +5,9 @@ const moment = moment_;
 
 @Injectable()
 export class Angular2MomentPickerService {
-    public moment: moment_.Moment = moment().set('minute', 0).set('seconds', 0);
+    public moment: moment_.Moment = moment()
+        .set('minute', 0)
+        .set('seconds', 0);
 
     public locale: string;
     public format: string;

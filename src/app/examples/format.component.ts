@@ -2,11 +2,11 @@ import * as moment from 'moment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-    selector: 'app-basic',
+    selector: 'app-format',
     template: `
         <div class="input-group">
             <input
-                [value]="momentBasic?.toString()"
+                [value]="moment?.format('YYYY MM DD')"
                 (click)="picker.toggle()"
                 class="form-control"
                 placeholder="Select a date"
@@ -15,21 +15,20 @@ import { Component, OnInit, ViewChild } from '@angular/core';
                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
             </div>
         </div>
-        <angular2-moment-picker
-            [moment]="momentBasic"
-            (changed)="changed($event)"
-            #angular2momentpicker
-        ></angular2-moment-picker>
+        <angular2-moment-picker [moment]="moment" (changed)="changed($event)" #format>
+        </angular2-moment-picker>
     `
 })
-export class BasicExampleComponent {
-    public momentBasic: moment.Moment;
+export class FormatExampleComponent implements OnInit {
+    public moment: moment.Moment;
 
-    @ViewChild('angular2momentpicker', { static: false }) picker;
+    @ViewChild('format', { static: false }) picker;
 
     constructor() {}
 
+    ngOnInit(): void {}
+
     public changed(event: moment.Moment) {
-        this.momentBasic = event;
+        this.moment = event;
     }
 }

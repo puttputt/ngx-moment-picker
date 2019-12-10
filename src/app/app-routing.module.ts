@@ -5,13 +5,14 @@ import { MinMaxExampleComponent } from './examples/min-max.component';
 import { ExampleComponent } from './examples/example.component';
 
 const routes: Routes = [
-  {
-    path: '', component: ExampleComponent
-  }
+    {
+        path: '',
+        component: ExampleComponent
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes, { useHash: true })],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

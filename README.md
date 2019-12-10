@@ -11,7 +11,7 @@ npm install angular2-moment-picker
 ## Usage
 
 ```html
-<input [value]="moment?.toString()" (click)="click()">
+<input [value]="moment?.toString()" (click)="picker.toggle()">
 
 <angular2-moment-picker 
         [moment]="moment"
@@ -30,10 +30,6 @@ export class ExampleComponent {
     @ViewChild('angular2momentpicker', { static: false }) picker;
 
     constructor() { }
-
-    public click() {
-        this.picker.show();
-    }
 
     public changed(event: moment.Moment) {
         this.moment = event;

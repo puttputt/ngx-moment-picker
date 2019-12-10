@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Input, Output, HostListener, ElementRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, HostListener } from '@angular/core';
 import * as moment_ from 'moment';
 import { Angular2MomentPickerService } from './angular2-moment-picker.service';
 
@@ -20,9 +20,7 @@ const moment = moment_;
     providers: [Angular2MomentPickerService]
 })
 export class Angular2MomentPickerComponent implements OnInit {
-
     @Input() public locale?: string = 'en-us';
-    @Input() public format?: string = 'LLL';
     @Input() public minview: string;
     @Input() public maxview: string;
     @Input() public maxdate?: string;
@@ -41,9 +39,7 @@ export class Angular2MomentPickerComponent implements OnInit {
     private isFocusInsideComponent: boolean = false;
     private isComponentClicked: boolean = false;
 
-    constructor(
-        public globals: Angular2MomentPickerService
-    ) { }
+    constructor(public globals: Angular2MomentPickerService) {}
 
     ngOnInit(): void {
         if (!this.moment) {
@@ -51,7 +47,6 @@ export class Angular2MomentPickerComponent implements OnInit {
         }
 
         this.globals.locale = this.locale;
-        this.globals.format = this.format;
 
         if (this.moment) {
             this.globals.moment = this.moment;
@@ -72,7 +67,7 @@ export class Angular2MomentPickerComponent implements OnInit {
         this.isFocusInsideComponent = false;
     }
 
-    public show(): void {
+    public toggle(): void {
         this.isFocusInsideComponent = true;
         this.isComponentClicked = true;
 
@@ -106,7 +101,6 @@ export class Angular2MomentPickerComponent implements OnInit {
             this.setCurrentView(this.viewStack[currentViewIndex - 1]);
         }
     }
-
 
     private buildViewStack(): ViewState[] {
         const stack: ViewState[] = [];
